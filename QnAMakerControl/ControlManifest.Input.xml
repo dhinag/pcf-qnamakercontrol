@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="DG.PC" constructor="QnAMakerControl" version="0.0.1" display-name-key="QnAMaker Control" description-key="This control integrates with QnAMaker to get you the answer based on the question context." control-type="standard">
+    <!-- property node identifies a specific, configurable piece of data that the control expects from CDS -->
+ <property name="value" display-name-key="QnaMaker Control" description-key="This control is powered by QnAMaker. Go ahead and ask your question." of-type="Multiple" usage="bound" required="true" />   
+    <resources>
+      <code path="index.ts" order="1"/>     
+      <css path="css/QnAMakerControl.css" order="1" />
+      <resx path="strings/QnAMakerControl.1033.resx" version="1.0.0" />
+    </resources>   
+  </control>
+</manifest>
