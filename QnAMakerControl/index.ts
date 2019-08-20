@@ -2,15 +2,15 @@ import {IInputs, IOutputs} from "./generated/ManifestTypes";
 
 export class QnAMakerControl implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 
-
 	// Value of the field is stored and used inside the control 
 	private _value:string;
 
 	// PCF framework delegate which will be assigned to this object which would be called whenever any update happens. 
-	private _notifyOutputChanged: () => void;
+	private _notifyOutputChanged: () => void;	
 	private questionText: HTMLInputElement;
 	private answerText: HTMLLabelElement;
 	private button: HTMLButtonElement;
+	private span: HTMLSpanElement;
 
 	// Reference to the control container HTMLDivElement
 	// This element contains all elements of our custom control example
@@ -34,6 +34,9 @@ export class QnAMakerControl implements ComponentFramework.StandardControl<IInpu
 	public init(context: ComponentFramework.Context<IInputs>, notifyOutputChanged: () => void, state: ComponentFramework.Dictionary, container:HTMLDivElement)
 	{
 		// Add control initialization code
+		this.span = document.createElement("span");	
+		this.span.className = "fas fa-robot fa-2x span-bot-Style";
+
 		//Creating an input element to get the question.
 		this.questionText = document.createElement("input");
 		this.questionText.setAttribute("type", "label");
@@ -53,13 +56,14 @@ export class QnAMakerControl implements ComponentFramework.StandardControl<IInpu
 
 		// Adding all the elements created to the container DIV.
 		this._container = document.createElement("div");
+		this._container.appendChild(this.span);
 		this._container.appendChild(this.questionText);
 		this._container.appendChild(this.button);
 		this._container.appendChild(this.answerText);		
 		container.appendChild(this._container);
 
 		this._notifyOutputChanged = notifyOutputChanged;
-	}
+	}	
 
 	/**
 	 * Button Event handler for the button created as part of this control
@@ -67,17 +71,20 @@ export class QnAMakerControl implements ComponentFramework.StandardControl<IInpu
 	 */
 		private onButtonClick(event: Event): void 
 		{
+			//Fetch the answer from QnAMaker API
 			fetch("https://yourhost.azurewebsites.net/qnamaker/knowledgebases/03d130ac-d295-488b-aaaa-bbbbc993411b2/generateAnswer", {
 			method: "POST",
 			body: JSON.stringify({ "question": this.questionText.value }),
 			headers: {
 				"Content-Type": "application/json",
 				"Authorization": "EndpointKey 19a46459-your-key-9e72-7904f77d3466"
-			},
+			},		
 
 			}).then(res=>res.json())
 			.then(res => {
-				this._value = res.answers[0].answer; 	this._notifyOutputChanged();}); 
+				this._value = res.answers[0].answer; 
+				this.answerText.innerText = this._value != null ? this._value.toString(): "";				
+				this._notifyOutputChanged();}); 
 		}
 
 	/**
@@ -87,8 +94,6 @@ export class QnAMakerControl implements ComponentFramework.StandardControl<IInpu
 	public updateView(context: ComponentFramework.Context<IInputs>): void
 	{
 		// Add code to update control view
-		this._value = context.parameters.value.raw;
-		this.answerText.innerText = this._value != null ? this._value.toString(): "";	
 	}
 
 	/** 
@@ -96,11 +101,8 @@ export class QnAMakerControl implements ComponentFramework.StandardControl<IInpu
 	 * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as “bound” or “output”
 	 */
 	public getOutputs(): IOutputs
-	{
-		let result: IOutputs = {
-			value: this._value
-		};
-		return result;
+	{		
+		return {};
 	}
 
 	/** 

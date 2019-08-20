@@ -1,33 +1,43 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css";
 
-/*
-	This file is part of the Microsoft PowerApps code samples. 
-	Copyright (C) Microsoft Corporation.  All rights reserved. 
-	This source code is intended only as a supplement to Microsoft Development Tools and/or  
-	on-line documentation.  See these other materials for detailed information regarding  
-	Microsoft code samples. 
-
-	THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER  
-	EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF  
-	MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. 
- */
  .DG.PC\.QnAMakerControl button.ask_Button_Style {
 	text-decoration: none;
  
     font-size: 14px;
-    margin: 4px 6px;
+	margin: 4px 10px;
     cursor: pointer;
 	color: white;
     border-radius: 0px;
 	background-color: rgb(59, 121, 183);
     border: none;
     padding: 5px;
-    text-align: center;
+	text-align: center;
+	border-radius: 5px;
+	width: 50px;
+    height: 40px;
 }
 
  .DG.PC\.QnAMakerControl .answer_Input_Style{
+	 padding : 10px 0px 10px 0px;
 	display: block;
 }
 
  .DG.PC\.QnAMakerControl .question_Input_Style{
 	width: 30%;
+	padding: 10px 8px;
+}
+
+.DG.PC\.QnAMakerControl .cog_image_Style
+{
+	padding-right : 20px;
+	height: 50px;
+	width: 50px;
+	vertical-align: middle;
+}
+
+.DG.PC\.QnAMakerControl .span-bot-Style
+{
+	color:#0079D6;
+	padding-right : 20px;
+	vertical-align: middle;
 }
