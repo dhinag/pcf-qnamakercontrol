@@ -1,2 +1,0 @@
-C:\PCFExpmnt\QnAMakerControl\obj\Debug\QnAMakerControl.pcfprojAssemblyReference.cache
-C:\PCFExpmnt\QnAMakerControl\obj\Debug\QnAMakerControl.pcfproj.CoreCompileInputs.cache
